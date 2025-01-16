@@ -1,15 +1,28 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    path: 'chat',
+    loadChildren: () => import("./chat/chat.module").then(m => m.ChatPageModule)
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import("./settings/settings.module").then(m => m.SettingsPageModule)
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'chat',
     pathMatch: 'full'
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
+  },
+  {
+    path: 'chat',
+    loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule)
   },
 ];
 

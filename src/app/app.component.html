@@ -1,3 +1,5 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-button id="open-chat" (click)="navigateTo('chat')">Chat</ion-button>
+  <ion-button id="open-settings" (click)="navigateTo('settings')">Settings</ion-button>
+  <router-outlet></router-outlet>
 </ion-app>
