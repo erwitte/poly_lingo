@@ -7,7 +7,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class LinguaFrancaService {
   private apiUrl = 'https://api.openai.com/v1/chat/completions';
-  private apiKey = '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';
+  private apiKey = '';
 
   latitude: number | null = null;
   longitude: number | null = null;
