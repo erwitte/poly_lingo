@@ -1,3 +1,20 @@
 ion-button{
-  display: inline;
+  padding: 0;
+}
+
+ion-grid{
+  width: 100%;
+  background: purple;
+}
+
+ion-router-outlet{
+  height: 100%;
+}
+
+ion-app{
+  background-color: red;
+}
+
+ion-col{
+  background-color: yellow;
 }

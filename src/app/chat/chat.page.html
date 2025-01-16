@@ -1,10 +1,14 @@
- <ion-list>
+<div id="container">
+  <ion-list>
     <ion-item *ngFor="let item of est">
       {{ item }}
     </ion-item>
   </ion-list>
+</div>
 
-  <ion-item>
-    <ion-label position="fixed">Enter Company Name</ion-label>
-    <ion-input placeholder="!!!!!!!!!!!!!!!"></ion-input>
-  </ion-item>
+<ion-item>
+  <ion-input placeholder="!!!!!!!!!!!!!!!"></ion-input>
+  <ion-button>send</ion-button>
+</ion-item>
+
+

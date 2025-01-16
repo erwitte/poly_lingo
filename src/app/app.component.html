@@ -1,17 +1,7 @@
 <ion-app>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
         <ion-button id="open-chat" (click)="navigateTo('chat')">Chat</ion-button>
-      </ion-col>
-      <ion-col>
         <ion-button id="open-settings" (click)="navigateTo('settings')">Settings</ion-button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <router-outlet></router-outlet>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-content>
+    <ion-router-outlet></ion-router-outlet>
+  </ion-content>
 </ion-app>

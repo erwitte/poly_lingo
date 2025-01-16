@@ -13,4 +13,6 @@ export class AppComponent {
 navigateTo(route: string) {
   this.router.navigate([route]);
 }
+  est: string[] = ["oiafsa", "eanmgfpoygf", "oasfafa", "oiafsa", "eanmgfpoygf", "oasfafa", "oiafsa", "eanmgfpoygf", "oasfafa", "oiafsa", "eanmgfpoygf", "oasfafa", "oiafsa", "eanmgfpoygf", "oasfafa", "oiafsa", "eanmgfpoygf", "oasfafa", "oiafsa", "eanmgfpoygf", "oasfafa", "oiafsa", "eanmgfpoygf", "oasfafa"];
+
 }

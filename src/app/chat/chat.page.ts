@@ -12,5 +12,5 @@ export class ChatPage implements OnInit {
 
   ngOnInit() {
   }
-  est: string[] = ["oiafsa", "eanmgfpoygf"];
+  est: string[] = ["oiafsa", "eanmgfpoygf", "oasfafa", "oiafsa", "eanmgfpoygf", "oasfafa", "oiafsa", "eanmgfpoygf", "oasfafa", "oiafsa", "eanmgfpoygf", "oasfafa", "oiafsa", "eanmgfpoygf", "oasfafa", "oiafsa", "eanmgfpoygf", "oasfafa", "oiafsa", "eanmgfpoygf", "oasfafa", "oiafsa", "eanmgfpoygf", "oasfafa"];
 }
