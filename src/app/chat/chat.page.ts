@@ -1,4 +1,5 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {AfterViewInit, Component} from '@angular/core';
+import { LinguaFrancaService } from '../services/linguafranca';
 
 @Component({
   selector: 'app-chat',
@@ -8,19 +9,20 @@ import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 })
 export class ChatPage implements AfterViewInit {
   inputElement: any;
-  constructor() { }
+  constructor(private linguaFrancaService: LinguaFrancaService) { }
 
   ngAfterViewInit() {
     this.inputElement = document.getElementById('input');
   }
   est: string[] = [];
-  
+
   send(){
     const value = this.inputElement.value;
     console.log('Input value:', value);
     this.est.push(value);
     this.inputElement.value = "";
     this.scrollDown();
+    this.linguaFrancaService.callOpenAI();
   }
 
   scrollDown(){
