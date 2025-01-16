@@ -7,8 +7,6 @@
 </div>
 
 <ion-item>
-  <ion-input placeholder="!!!!!!!!!!!!!!!"></ion-input>
-  <ion-button>send</ion-button>
+  <ion-input id="input" placeholder="..." (keyup.enter)="send()"></ion-input>
+  <ion-button (click)="send()">send</ion-button>
 </ion-item>
-
-

@@ -1,20 +1,12 @@
-ion-button{
-  padding: 0;
+#button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+  z-index: 1000;
 }
 
-ion-grid{
-  width: 100%;
-  background: purple;
-}
-
-ion-router-outlet{
-  height: 100%;
-}
-
-ion-app{
-  background-color: red;
-}
-
-ion-col{
-  background-color: yellow;
+ion-router-outlet {
+  margin-top: var(--button-container-height);
+  margin-bottom: 10px; //hebt die leiste an wenig an, sieht besser aus
 }
