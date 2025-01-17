@@ -10,6 +10,7 @@ import {LanguagechatService} from "../services/languagechat.service";
 })
 export class ChatPage implements AfterViewInit {
   inputElement: any;
+  isDisabled: boolean = false;
   constructor(private languageService: LanguagechatService) { }
 
   ngAfterViewInit() {
@@ -19,12 +20,13 @@ export class ChatPage implements AfterViewInit {
 
   async send(){
     const value = this.inputElement.value;
-    console.log('Input value:', value);
     this.est.push(value);
+    this.isDisabled = true;
     this.inputElement.value = "";
     this.scrollDown();
     const aiResponse = await this.languageService.getAiResponse();
     this.est.push(aiResponse);
+    this.isDisabled = false;
     this.scrollDown();
   }
 

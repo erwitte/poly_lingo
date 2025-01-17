@@ -7,6 +7,10 @@
 </div>
 
 <ion-item>
-  <ion-input id="input" placeholder="..." (keyup.enter)="send()"></ion-input>
+  <ion-input id="input"
+             placeholder="..."
+             (keyup.enter)="send()"
+             [disabled]="isDisabled"
+  ></ion-input>
   <ion-button (click)="send()">send</ion-button>
 </ion-item>
