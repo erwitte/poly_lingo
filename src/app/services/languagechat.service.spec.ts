@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GeolocationService } from './linguafranca.service';
+import { LanguagechatService } from './languagechat.service';
 
-describe('GeolocationService', () => {
-  let service: GeolocationService;
+describe('LanguagechatService', () => {
+  let service: LanguagechatService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(GeolocationService);
+    service = TestBed.inject(LanguagechatService);
   });
 
   it('should be created', () => {

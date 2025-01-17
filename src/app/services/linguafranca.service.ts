@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Geolocation } from '@capacitor/geolocation';
+import {Injectable} from '@angular/core';
+import {Geolocation} from '@capacitor/geolocation';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
+import {firstValueFrom} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -10,29 +11,22 @@ export class LinguaFrancaService {
   private apiUrl = 'https://api.openai.com/v1/chat/completions';
   private apiKey = environment.openAIApiKey;
 
-  latitude: number | null = null;
-  longitude: number | null = null;
-
   coordinatesString: string | null = null;
 
   constructor(private http: HttpClient) { }
 
-  async getCurrentLocation() {
+  private async getCurrentLocation() {
     try {
       const position = await Geolocation.getCurrentPosition();
-      this.latitude = position.coords.latitude;
-      this.longitude = position.coords.longitude;
-      this.coordinatesString = `Latitude: ${this.latitude}, Longitude: ${this.longitude}`;
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      this.coordinatesString = `Latitude: ${latitude}, Longitude: ${longitude}`;
     } catch (error) {
       console.error('Error getting location:', error);
     }
   }
 
-  async getLinguaFranca(){
-    await this.getCurrentLocation();
-  }
-
-  async callOpenAI() {
+  private async callOpenAI() {
     await this.getCurrentLocation();
     const data = {
       model: 'gpt-3.5-turbo',
@@ -42,21 +36,22 @@ export class LinguaFrancaService {
         "reply only the language code"}
       ],
       max_tokens: 50,
-      temperature: 0.7
+      temperature: 0.1
     };
-
-    this.http.post(this.apiUrl, data, {
+    return firstValueFrom(this.http.post(this.apiUrl, data, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${this.apiKey}`
       }
-    }).subscribe(
-      (response) => {
-        console.log('Response from OpenAI:', response);
-      },
-      (error) => {
-        console.error('Error calling OpenAI API:', error);
-      }
-    )
+    }));
+  }
+
+  async getLanguageCode() {
+    try {
+      const response: any = await this.callOpenAI();
+      return response.choices[0].message.content;
+    } catch (error) {
+      return null;
+    }
   }
 }

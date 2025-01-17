@@ -1,5 +1,5 @@
 import {AfterViewInit, Component} from '@angular/core';
-import { LinguaFrancaService } from '../services/linguafranca';
+import { LinguaFrancaService } from '../services/linguafranca.service';
 
 @Component({
   selector: 'app-chat',
@@ -16,13 +16,14 @@ export class ChatPage implements AfterViewInit {
   }
   est: string[] = [];
 
-  send(){
+  async send(){
     const value = this.inputElement.value;
     console.log('Input value:', value);
     this.est.push(value);
     this.inputElement.value = "";
     this.scrollDown();
-    this.linguaFrancaService.callOpenAI();
+    const code = await this.linguaFrancaService.getLanguageCode();
+    console.log("code: " + code);
   }
 
   scrollDown(){
