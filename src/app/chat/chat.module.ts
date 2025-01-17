@@ -8,13 +8,16 @@ import { ChatPageRoutingModule } from './chat-routing.module';
 
 import { ChatPage } from './chat.page';
 
+import { LineBreaksPipe } from '../line-breaks.pipe';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ChatPageRoutingModule
+    ChatPageRoutingModule,
+    LineBreaksPipe
   ],
-  declarations: [ChatPage]
+  declarations: [ChatPage],
 })
 export class ChatPageModule {}

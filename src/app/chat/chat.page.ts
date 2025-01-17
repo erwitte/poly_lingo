@@ -23,7 +23,9 @@ export class ChatPage implements AfterViewInit {
     this.est.push(value);
     this.inputElement.value = "";
     this.scrollDown();
-    this.languageService.callOpenAI();
+    const aiResponse = await this.languageService.getAiResponse();
+    this.est.push(aiResponse);
+    this.scrollDown();
   }
 
   scrollDown(){

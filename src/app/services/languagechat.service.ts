@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
+import {firstValueFrom} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class LanguagechatService {
 
   constructor(private http: HttpClient) { }
 
-  async callOpenAI() {
+  private async callOpenAI() {
     const data = {
       model: 'gpt-4o-mini',
       messages: [
@@ -22,19 +23,20 @@ export class LanguagechatService {
       max_tokens: 100,
       temperature: 0.5
     };
-
-    this.http.post(this.apiUrl, data, {
+    return firstValueFrom(this.http.post(this.apiUrl, data, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${this.apiKey}`
       }
-    }).subscribe(
-      (response) => {
-        console.log('Response from OpenAI:', response);
-      },
-      (error) => {
-        console.error('Error calling OpenAI API:', error);
-      }
-    )
+    }));
+  }
+
+  async getAiResponse() {
+    try {
+      const response: any = await this.callOpenAI();
+      return response.choices[0].message.content;
+    } catch (error) {
+      return null;
+    }
   }
 }
