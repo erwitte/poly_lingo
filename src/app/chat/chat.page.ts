@@ -20,6 +20,7 @@ export class ChatPage implements AfterViewInit {
 
   async send(){
     const value = this.inputElement.value;
+    if (value == "") return;
     this.est.push(value);
     this.isDisabled = true;
     this.inputElement.value = "";

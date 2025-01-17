@@ -1,6 +1,7 @@
 <div id="container">
   <ion-list>
-    <ion-item *ngFor="let item of est">
+    <ion-item *ngFor="let item of est; let i = index"
+              [ngClass]="{'light-grey': i % 2 === 0, 'slightly-darker-grey': i % 2 !== 0}">
       <span [innerHTML]="item | lineBreaks"></span>
     </ion-item>
   </ion-list>

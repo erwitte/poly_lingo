@@ -1,3 +1,16 @@
 #container{
   overflow: scroll;
 }
+
+
+.light-grey {
+  background-color: lightcyan;
+}
+
+.slightly-darker-grey {
+  background-color: lightblue;
+}
+
+ion-item {
+  --background: transparent; //überschreibt standard hintergrund
+}
