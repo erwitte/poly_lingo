@@ -13,13 +13,14 @@ export class LanguagechatService {
 
   async callOpenAI() {
     const data = {
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4o-mini',
       messages: [
-        { role: 'system', content: 'You are a helpful assistant for learning languages. You provide tips and correct grammar and vocabulary mistakes.' },
-        { role: 'user', content: "Me dont knof engrish"}
+        { role: 'system', content: 'You are a helpful assistant for learning languages. You provide tips and correct grammar and vocabulary mistakes. the language in question' +
+            'has the code es. Also provide the corrected prompt. Give the tips in language code de.' },
+        { role: 'user', content: "Yo querer ir a la playa pero yo no tiene dinero."}
       ],
-      max_tokens: 50,
-      temperature: 0.7
+      max_tokens: 100,
+      temperature: 0.5
     };
 
     this.http.post(this.apiUrl, data, {
