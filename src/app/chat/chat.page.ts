@@ -1,5 +1,4 @@
 import {AfterViewInit, Component} from '@angular/core';
-import { LinguaFrancaService } from '../services/linguafranca.service';
 import {LanguagechatService} from "../services/languagechat.service";
 
 @Component({
