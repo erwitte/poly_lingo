@@ -17,10 +17,10 @@ export class LanguagechatService {
       model: 'gpt-4o-mini',
       messages: [
         { role: 'system', content: 'You are a helpful conversation partner for learning languages. ' +
-            'You provide tips and correct grammar and vocabulary mistakes. the language in question' +
+            'You provide tips and correct grammar and vocabulary mistakes. the target language' +
             'is ' + localStorage.getItem("targetLanguage") +
             '. Also provide the corrected prompt if there is something to correct. Give the tips in language ' + localStorage.getItem("userLanguage") +
-        ". Lead a conversation with the user besides your other task."},
+        ". Lead a conversation in the target language with the user besides your other task."},
         { role: 'user', content: message}
       ],
       max_tokens: 200,
