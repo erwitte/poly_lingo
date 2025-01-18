@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {LanguagechatService} from "../services/languagechat.service";
 import {ActivatedRoute} from "@angular/router";
+import {UiTranslatorService} from "../services/ui-translator.service";
 
 @Component({
   selector: 'app-chat',
@@ -12,7 +13,8 @@ export class ChatPage implements AfterViewInit, OnInit {
   inputElement: any;
   isDisabled: boolean = false;
   constructor(private languageService: LanguagechatService,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              private uiTranslator: UiTranslatorService,) { }
 
   ngAfterViewInit() {
     this.inputElement = document.getElementById('input');
@@ -36,6 +38,8 @@ export class ChatPage implements AfterViewInit, OnInit {
   conversation: string[] = [];
 
   async send(){
+    const a: any = await this.uiTranslator.translateText("hallo", "de", "en");
+    console.log("ü: " + a);
     const value = this.inputElement.value;
     if (value == "") return;
     this.conversation.push(value);
