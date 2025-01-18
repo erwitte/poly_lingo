@@ -1,5 +1,6 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {LanguagechatService} from "../services/languagechat.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-chat',
@@ -7,25 +8,43 @@ import {LanguagechatService} from "../services/languagechat.service";
   styleUrls: ['./chat.page.scss'],
   standalone: false
 })
-export class ChatPage implements AfterViewInit {
+export class ChatPage implements AfterViewInit, OnInit {
   inputElement: any;
   isDisabled: boolean = false;
-  constructor(private languageService: LanguagechatService) { }
+  constructor(private languageService: LanguagechatService,
+              private activatedRoute: ActivatedRoute) { }
 
   ngAfterViewInit() {
     this.inputElement = document.getElementById('input');
   }
-  est: string[] = [];
+
+  ngOnInit(){
+    this.activatedRoute.params.subscribe(() => {
+      if (localStorage.getItem('userLanguage') == null || localStorage.getItem('targetLanguage') == null) {
+        if (localStorage.getItem('userLanguage') == null) {
+          this.conversation.push("set the user's language in settings");
+        }
+        if (localStorage.getItem('targetLanguage') == null) {
+          this.conversation.push("set the target language in settings");
+        }
+        this.isDisabled = true;
+      } else {
+        this.isDisabled = false;
+        this.conversation = [];
+      }
+    });
+  }
+  conversation: string[] = [];
 
   async send(){
     const value = this.inputElement.value;
     if (value == "") return;
-    this.est.push(value);
+    this.conversation.push(value);
     this.isDisabled = true;
     this.inputElement.value = "";
     this.scrollDown();
     const aiResponse = await this.languageService.getAiResponse();
-    this.est.push(aiResponse);
+    this.conversation.push(aiResponse);
     this.isDisabled = false;
     this.scrollDown();
   }

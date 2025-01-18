@@ -3,14 +3,26 @@
 }
 
 
-.light-grey {
-  background-color: #f0f0f0;
-}
+@media (prefers-color-scheme: light) {
+  .light-grey {
+    background-color: #f0f0f0;
+  }
 
-.slightly-darker-grey {
-  background-color: #e6e6e6;
+  .slightly-darker-grey {
+    background-color: #e6e6e6;
+  }
 }
 
 ion-item {
   --background: transparent; //überschreibt standard hintergrund
+}
+
+@media (prefers-color-scheme: dark) {
+  .light-grey {
+    background-color: #1e1e1e;
+  }
+
+  .slightly-darker-grey {
+    background-color: #242424;
+  }
 }

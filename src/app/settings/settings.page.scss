@@ -3,17 +3,28 @@
   height: 100vh;
 }
 
-.left,
-.right {
+.left, .right {
   width: 50%;
   padding: 20px;
   overflow-y: auto;
 }
 
-.left {
-  background-color: #f0f0f0;
+@media (prefers-color-scheme: dark) {
+  .left {
+    background-color: #1e1e1e;
+  }
+
+  .right {
+    background-color: #2a2a2a;
+  }
 }
 
-.right {
-  background-color: #e6e6e6;
+@media (prefers-color-scheme: light) {
+  .left {
+    background-color: #f0f0f0;
+  }
+
+  .right {
+    background-color: #e6e6e6;
+  }
 }
