@@ -33,7 +33,7 @@ export class LinguaFrancaService {
       messages: [
         { role: 'system', content: 'You are a helpful assistant.' },
         { role: 'user', content: 'What is the lingua franca of ' + this.coordinatesString +
-        "reply only the language code"}
+        "reply only the language"}
       ],
       max_tokens: 50,
       temperature: 0.1
@@ -46,7 +46,7 @@ export class LinguaFrancaService {
     }));
   }
 
-  async getLanguageCode() {
+  async getLanguage() {
     try {
       const response: any = await this.callOpenAI();
       return response.choices[0].message.content;

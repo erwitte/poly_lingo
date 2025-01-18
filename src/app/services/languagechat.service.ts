@@ -17,7 +17,8 @@ export class LanguagechatService {
       model: 'gpt-4o-mini',
       messages: [
         { role: 'system', content: 'You are a helpful assistant for learning languages. You provide tips and correct grammar and vocabulary mistakes. the language in question' +
-            'has the code es. Also provide the corrected prompt. Give the tips in language code de.' },
+            'is ' + localStorage.getItem("targetLanguage") +
+            '. Also provide the corrected prompt. Give the tips in language ' + localStorage.getItem("userLanguage") },
         { role: 'user', content: "Yo querer ir a la playa pero yo no tiene dinero."}
       ],
       max_tokens: 100,
@@ -32,11 +33,13 @@ export class LanguagechatService {
   }
 
   async getAiResponse() {
+    console.log("target: " + localStorage.getItem("targetLanguage") + " user: " + localStorage.getItem("userLanguage"));
     try {
       const response: any = await this.callOpenAI();
       return response.choices[0].message.content;
     } catch (error) {
       return null;
     }
+
   }
 }
