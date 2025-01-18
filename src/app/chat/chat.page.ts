@@ -30,7 +30,6 @@ export class ChatPage implements AfterViewInit, OnInit {
         this.isDisabled = true;
       } else {
         this.isDisabled = false;
-        this.conversation = [];
       }
     });
   }
@@ -55,5 +54,9 @@ export class ChatPage implements AfterViewInit, OnInit {
       // @ts-ignore
       listContainer.scrollTop = listContainer.scrollHeight;
     }, 5); // verzweiflung an auto scroll, nicht schön aber funktioniert
+  }
+
+  clearConversation(){
+    this.conversation = [];
   }
 }
