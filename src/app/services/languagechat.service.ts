@@ -12,17 +12,19 @@ export class LanguagechatService {
 
   constructor(private http: HttpClient) { }
 
-  private async callOpenAI() {
+  private async callOpenAI(message: string) {
     const data = {
       model: 'gpt-4o-mini',
       messages: [
-        { role: 'system', content: 'You are a helpful assistant for learning languages. You provide tips and correct grammar and vocabulary mistakes. the language in question' +
+        { role: 'system', content: 'You are a helpful conversation partner for learning languages. ' +
+            'You provide tips and correct grammar and vocabulary mistakes. the language in question' +
             'is ' + localStorage.getItem("targetLanguage") +
-            '. Also provide the corrected prompt. Give the tips in language ' + localStorage.getItem("userLanguage") },
-        { role: 'user', content: "Yo querer ir a la playa pero yo no tiene dinero."}
+            '. Also provide the corrected prompt if there is something to correct. Give the tips in language ' + localStorage.getItem("userLanguage") +
+        ". Lead a conversation with the user besides your other task."},
+        { role: 'user', content: message}
       ],
-      max_tokens: 100,
-      temperature: 0.5
+      max_tokens: 200,
+      temperature: 0.8
     };
     return firstValueFrom(this.http.post(this.apiUrl, data, {
       headers: {
@@ -32,14 +34,13 @@ export class LanguagechatService {
     }));
   }
 
-  async getAiResponse() {
+  async getAiResponse(message: string) {
     console.log("target: " + localStorage.getItem("targetLanguage") + " user: " + localStorage.getItem("userLanguage"));
     try {
-      const response: any = await this.callOpenAI();
+      const response: any = await this.callOpenAI(message);
       return response.choices[0].message.content;
     } catch (error) {
       return null;
     }
-
   }
 }

@@ -43,7 +43,7 @@ export class ChatPage implements AfterViewInit, OnInit {
     this.isDisabled = true;
     this.inputElement.value = "";
     this.scrollDown();
-    const aiResponse = await this.languageService.getAiResponse();
+    const aiResponse = await this.languageService.getAiResponse(value);
     this.conversation.push(aiResponse);
     this.isDisabled = false;
     this.scrollDown();
