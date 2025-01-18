@@ -28,7 +28,7 @@ export class LanguagechatService {
     };
     return firstValueFrom(this.http.post(this.apiUrl, data, {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
         Authorization: `Bearer ${this.apiKey}`
       }
     }));

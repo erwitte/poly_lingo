@@ -8,7 +8,7 @@ import { ChatPageRoutingModule } from './chat-routing.module';
 
 import { ChatPage } from './chat.page';
 
-import { LineBreaksPipe } from '../line-breaks.pipe';
+import { LineBreaksPipe } from '../pipes/line-breaks.pipe';
 
 @NgModule({
   imports: [
