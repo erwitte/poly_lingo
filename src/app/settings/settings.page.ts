@@ -43,17 +43,17 @@ export class SettingsPage implements OnInit {
               private uiTranslator: UiTranslatorService) { }
 
   ngOnInit() {
-    const userLanguageCode = localStorage.getItem('userLanguageCode');
-    const userLanguageName = localStorage.getItem('userLanguageName');
-    const targetLanguageCode = localStorage.getItem('targetLanguageCode');
-    const targetLanguageName = localStorage.getItem('targetLanguageName');
+    const userLanguageCodeStartUp = localStorage.getItem('userLanguageCode');
+    const userLanguageNameStartUp = localStorage.getItem('userLanguageName');
+    const targetLanguageCodeStartUp = localStorage.getItem('targetLanguageCode');
+    const targetLanguageNameStartUp = localStorage.getItem('targetLanguageName');
 
-    this.userLanguage = userLanguageCode && userLanguageName
-      ? { name: userLanguageName, code: userLanguageCode }
+    this.userLanguage = userLanguageCodeStartUp && userLanguageNameStartUp
+      ? { name: userLanguageNameStartUp, code: userLanguageCodeStartUp }
       : null;
 
-    this.targetLanguage = targetLanguageCode && targetLanguageName
-      ? { name: targetLanguageName, code: targetLanguageCode }
+    this.targetLanguage = targetLanguageCodeStartUp && targetLanguageNameStartUp
+      ? { name: targetLanguageNameStartUp, code: targetLanguageCodeStartUp }
       : null;
   }
 
