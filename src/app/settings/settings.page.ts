@@ -8,75 +8,83 @@ import { LinguaFrancaService } from '../services/linguafranca.service';
   standalone: false
 })
 export class SettingsPage implements OnInit {
-  userLanguage: string | null = null;
-  targetLanguage: string | null = null;
-  languages:string[] = [
-    'English',
-    'Mandarin Chinese',
-    'Spanish',
-    'Hindi',
-    'Arabic',
-    'Bengali',
-    'Portuguese',
-    'Russian',
-    'Japanese',
-    'Punjabi',
-    'German',
-    'Javanese',
-    'Wu Chinese (Shanghainese)',
-    'Malay/Indonesian',
-    'Telugu',
-    'Vietnamese',
-    'Korean',
-    'French',
-    'Turkish',
-    'Tamil',
-    'Italian',
-    'Urdu',
-    'Gujarati',
-    'Thai',
-    'Persian (Farsi)',
-    'Polish',
-    'Ukrainian',
-    'Dutch',
-    'Swedish',
-    'Hungarian'
+  userLanguage: { name: string; code: string } | null = null; // Object for user language
+  targetLanguage: { name: string; code: string } | null = null;
+  languages = [
+    { name: 'English', code: 'en' },
+    { name: 'Mandarin Chinese', code: 'zh' },
+    { name: 'Spanish', code: 'es' },
+    { name: 'Hindi', code: 'hi' },
+    { name: 'Arabic', code: 'ar' },
+    { name: 'Bengali', code: 'bn' },
+    { name: 'Portuguese', code: 'pt' },
+    { name: 'Russian', code: 'ru' },
+    { name: 'Japanese', code: 'ja' },
+    { name: 'Punjabi', code: 'pa' },
+    { name: 'German', code: 'de' },
+    { name: 'Javanese', code: 'jv' },
+    { name: 'Wu Chinese (Shanghainese)', code: 'wuu' },
+    { name: 'Malay/Indonesian', code: 'ms' },
+    { name: 'Telugu', code: 'te' },
+    { name: 'Vietnamese', code: 'vi' },
+    { name: 'Korean', code: 'ko' },
+    { name: 'French', code: 'fr' },
+    { name: 'Turkish', code: 'tr' },
+    { name: 'Tamil', code: 'ta' }
   ];
 
   constructor(private linguaFrancaService: LinguaFrancaService) { }
 
   ngOnInit() {
-    this.userLanguage = localStorage.getItem('userLanguage');
-    this.targetLanguage = localStorage.getItem('targetLanguage');
+    const userLanguageCode = localStorage.getItem('userLanguageCode');
+    const userLanguageName = localStorage.getItem('userLanguageName');
+    const targetLanguageCode = localStorage.getItem('targetLanguageCode');
+    const targetLanguageName = localStorage.getItem('targetLanguageName');
+
+    this.userLanguage = userLanguageCode && userLanguageName
+      ? { name: userLanguageName, code: userLanguageCode }
+      : null;
+
+    this.targetLanguage = targetLanguageCode && targetLanguageName
+      ? { name: targetLanguageName, code: targetLanguageCode }
+      : null;
   }
 
-  async setOwnGps(){
-    this.userLanguage = await this.linguaFrancaService.getLanguage();
-    localStorage.removeItem('userLanguage');
-    if (this.userLanguage != null) {
-      localStorage.setItem('userLanguage', this.userLanguage);
+  async setOwnGps() {
+    const languageName = await this.linguaFrancaService.getLanguage();
+    const language = this.languages.find(lang => lang.name === languageName);
+
+    if (language) {
+      this.userLanguage = language;
+      console.log("User language:", language);
+      localStorage.setItem('userLanguageCode', language.code);
+      localStorage.setItem('userLanguageName', language.name);
     }
   }
 
-  async setTargetGps(){
-    this.targetLanguage = await this.linguaFrancaService.getLanguage();
-    localStorage.removeItem("targetLanguage");
-    if (this.targetLanguage != null) {
-      localStorage.setItem('targetLanguage', this.targetLanguage);
+  async setTargetGps() {
+    const languageName = await this.linguaFrancaService.getLanguage();
+    const language = this.languages.find(lang => lang.name === languageName);
+
+    if (language) {
+      this.targetLanguage = language;
+      console.log("Target language:", language);
+      localStorage.setItem('targetLanguageCode', language.code);
+      localStorage.setItem('targetLanguageName', language.name);
     }
   }
 
-  onTargetLanguageChange(event: any) {
-    localStorage.removeItem("targetLanguage");
-    if (this.targetLanguage != null) {
-      localStorage.setItem("targetLanguage", this.targetLanguage);
+  onTargetLanguageChange() {
+    if (this.targetLanguage) {
+      localStorage.setItem('targetLanguageCode', this.targetLanguage.code);
+      localStorage.setItem('targetLanguageName', this.targetLanguage.name);
     }
   }
 
-  onUserLanguageChange(event: any) {
-    localStorage.removeItem("userLanguage");
-    if (this.userLanguage != null) {
-      localStorage.setItem("userLanguage", this.userLanguage);
+  onUserLanguageChange() {
+    if (this.userLanguage) {
+      localStorage.setItem('userLanguageCode', this.userLanguage.code);
+      localStorage.setItem('userLanguageName', this.userLanguage.name);
     }
   }
 }

@@ -38,8 +38,7 @@ export class ChatPage implements AfterViewInit, OnInit {
   conversation: string[] = [];
 
   async send(){
-    const a: any = await this.uiTranslator.translateText("hallo", "de", "en");
-    console.log("ü: " + a);
+    //const a: any = await this.uiTranslator.translateText("hallo", "de");
     const value = this.inputElement.value;
     if (value == "") return;
     this.conversation.push(value);
@@ -57,7 +56,7 @@ export class ChatPage implements AfterViewInit, OnInit {
     setTimeout(() => {
       // @ts-ignore
       listContainer.scrollTop = listContainer.scrollHeight;
-    }, 5); // verzweiflung an auto scroll, nicht schön aber funktioniert
+    }, 5);
   }
 
   clearConversation(){

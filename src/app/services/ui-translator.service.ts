@@ -11,7 +11,7 @@ export class UiTranslatorService {
 
   constructor(private http: HttpClient) { }
 
-  async translateText(text: string, sourceLang: string, targetLang: string): Promise<string | null> {
+  async translateText(text: string, targetLang: string): Promise<string | null> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
     });
@@ -19,7 +19,7 @@ export class UiTranslatorService {
     const body = new URLSearchParams();
     body.set('auth_key', this.authKey);
     body.set('text', text);
-    body.set('source_lang', sourceLang.toUpperCase());
+    body.set('source_lang', "en".toUpperCase());
     body.set('target_lang', targetLang.toUpperCase());
 
     try {

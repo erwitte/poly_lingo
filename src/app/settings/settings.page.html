@@ -1,24 +1,24 @@
 <div class="container">
   <div class="left">
-    <h3>Your language: {{userLanguage}}</h3>
+    <h3>Your language: {{userLanguage?.name}}</h3>
     <ion-button (click)="setOwnGps()">set by gps</ion-button>
     <ion-item>
       <ion-label>Choose a Language</ion-label>
-      <ion-select placeholder="Select One" [(ngModel)]="userLanguage" (ionChange)="onUserLanguageChange($event)">
+      <ion-select placeholder="Select One" [(ngModel)]="userLanguage" (ionChange)="onUserLanguageChange()">
         <ion-select-option *ngFor="let language of languages" [value]="language">
-          {{ language }}
+          {{ language.name }}
         </ion-select-option>
       </ion-select>
     </ion-item>
   </div>
   <div class="right">
-    <h3>Target language: {{targetLanguage}}</h3>
+    <h3>Target language: {{targetLanguage?.name}}</h3>
     <ion-button (click)="setTargetGps()">set by gps</ion-button>
     <ion-item>
       <ion-label>Choose a Language</ion-label>
-      <ion-select placeholder="Select One" [(ngModel)]="targetLanguage" (ionChange)="onTargetLanguageChange($event)">
+      <ion-select placeholder="Select One" [(ngModel)]="targetLanguage" (ionChange)="onTargetLanguageChange()">
         <ion-select-option *ngFor="let language of languages" [value]="language">
-          {{ language }}
+          {{ language.name }}
         </ion-select-option>
       </ion-select>
     </ion-item>
