@@ -18,8 +18,8 @@ export class LanguagechatService {
       messages: [
         { role: 'system', content: 'You are a helpful conversation partner for learning languages. ' +
             'You provide tips and correct grammar and vocabulary mistakes. the target language' +
-            'is ' + localStorage.getItem("targetLanguage") +
-            '. Also provide the corrected prompt if there is something to correct. Give the tips in language ' + localStorage.getItem("userLanguage") +
+            'is ' + localStorage.getItem("targetLanguageName") +
+            '. Also provide the corrected prompt if there is something to correct. Give the tips in language ' + localStorage.getItem("userLanguageName") +
         ". Lead a conversation in the target language with the user besides your other task."},
         { role: 'user', content: message}
       ],
