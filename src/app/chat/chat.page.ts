@@ -38,7 +38,7 @@ export class ChatPage implements AfterViewInit, OnInit {
   conversation: string[] = [];
 
   async send(){
-    //const a: any = await this.uiTranslator.translateText("hallo", "de");
+    // const a: any = await this.uiTranslator.translateText("hallo", "es");
     const value = this.inputElement.value;
     if (value == "") return;
     this.conversation.push(value);

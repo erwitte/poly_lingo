@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {firstValueFrom} from "rxjs";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UiTranslatorService {
   private deeplApiUrl = 'https://api-free.deepl.com/v2/translate';
-  private authKey = 'ac3e3234-4c3a-4dfa-aed8-5124a50c72c6:fx';
+  private authKey = environment.deeplApiKey;
 
   constructor(private http: HttpClient) { }
 
