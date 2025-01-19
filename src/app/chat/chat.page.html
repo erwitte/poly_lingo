@@ -13,6 +13,6 @@
              (keyup.enter)="send()"
              [disabled]="isDisabled"
   ></ion-input>
-  <ion-button (click)="clearConversation()">clear conversation</ion-button>
-  <ion-button (click)="send()">send</ion-button>
+  <ion-button (click)="clearConversation()">{{clearConversationButton}}</ion-button>
+  <ion-button (click)="send()">{{sendButton}}</ion-button>
 </ion-item>

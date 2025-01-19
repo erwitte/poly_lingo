@@ -12,6 +12,10 @@ import {UiTranslatorService} from "../services/ui-translator.service";
 export class ChatPage implements AfterViewInit, OnInit {
   inputElement: any;
   isDisabled: boolean = false;
+
+  clearConversationButton: string | null = "clear conversation";
+  sendButton: string | null = "send";
+
   constructor(private languageService: LanguagechatService,
               private activatedRoute: ActivatedRoute,
               private uiTranslator: UiTranslatorService,) { }
@@ -21,7 +25,7 @@ export class ChatPage implements AfterViewInit, OnInit {
   }
 
   ngOnInit(){
-    this.activatedRoute.params.subscribe(() => {
+    this.activatedRoute.params.subscribe(async () => {
       if (localStorage.getItem('userLanguage') == null || localStorage.getItem('targetLanguage') == null) {
         if (localStorage.getItem('userLanguage') == null) {
           this.conversation.push("set the user's language in settings");
@@ -32,13 +36,19 @@ export class ChatPage implements AfterViewInit, OnInit {
         this.isDisabled = true;
       } else {
         this.isDisabled = false;
+        this.clearConversationButton = await this.uiTranslator.translateUi("clear conversation");
+        this.sendButton = await this.uiTranslator.translateUi("send");
       }
     });
   }
   conversation: string[] = [];
 
+  async translateUi(){
+
+  }
+
   async send(){
-    // const a: any = await this.uiTranslator.translateText("hallo", "es");
+    // const a: any = await this.uiTranslator.translateText("Your language:", "es");
     const value = this.inputElement.value;
     if (value == "") return;
     this.conversation.push(value);
@@ -56,7 +66,7 @@ export class ChatPage implements AfterViewInit, OnInit {
     setTimeout(() => {
       // @ts-ignore
       listContainer.scrollTop = listContainer.scrollHeight;
-    }, 5);
+    }, 5); // ohne time out wird nur zum vorletzten eintrag des arrays gescrollt
   }
 
   clearConversation(){

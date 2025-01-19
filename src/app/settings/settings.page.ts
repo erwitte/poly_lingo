@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LinguaFrancaService } from '../services/linguafranca.service';
+import {UiTranslatorService} from "../services/ui-translator.service";
 
 @Component({
   selector: 'app-settings',
@@ -8,6 +9,11 @@ import { LinguaFrancaService } from '../services/linguafranca.service';
   standalone: false
 })
 export class SettingsPage implements OnInit {
+  yourLanguageHeading: string | null = "Your language: -";
+  targetLanguageHeading: string | null = "Target language: -";
+  setByGpsButton: string | null = "set by gps";
+  chooseALanguageText: string | null = "choose a language";
+
   userLanguage: { name: string; code: string } | null = null; // Object for user language
   targetLanguage: { name: string; code: string } | null = null;
   languages = [
@@ -33,7 +39,8 @@ export class SettingsPage implements OnInit {
     { name: 'Tamil', code: 'ta' }
   ];
 
-  constructor(private linguaFrancaService: LinguaFrancaService) { }
+  constructor(private linguaFrancaService: LinguaFrancaService,
+              private uiTranslator: UiTranslatorService) { }
 
   ngOnInit() {
     const userLanguageCode = localStorage.getItem('userLanguageCode');
@@ -50,6 +57,13 @@ export class SettingsPage implements OnInit {
       : null;
   }
 
+  async translateUi(){
+    this.yourLanguageHeading = await this.uiTranslator.translateUi("Your Language: " + this.userLanguage?.name);
+    this.targetLanguageHeading = await this.uiTranslator.translateUi("Your Language: " + this.targetLanguage?.name);
+    this.setByGpsButton = await this.uiTranslator.translateUi("set by gps");
+    this.chooseALanguageText = await this.uiTranslator.translateUi("choose a language");
+  }
+
   async setOwnGps() {
     const languageName = await this.linguaFrancaService.getLanguage();
     const language = this.languages.find(lang => lang.name === languageName);
@@ -59,6 +73,7 @@ export class SettingsPage implements OnInit {
       console.log("User language:", language);
       localStorage.setItem('userLanguageCode', language.code);
       localStorage.setItem('userLanguageName', language.name);
+      await this.translateUi();
     }
   }
 
@@ -71,13 +86,15 @@ export class SettingsPage implements OnInit {
       console.log("Target language:", language);
       localStorage.setItem('targetLanguageCode', language.code);
       localStorage.setItem('targetLanguageName', language.name);
+      this.targetLanguageHeading = await this.uiTranslator.translateUi("Your Language: " + this.targetLanguage?.name);
     }
   }
 
-  onTargetLanguageChange() {
+  async onTargetLanguageChange() {
     if (this.targetLanguage) {
       localStorage.setItem('targetLanguageCode', this.targetLanguage.code);
       localStorage.setItem('targetLanguageName', this.targetLanguage.name);
+      this.targetLanguageHeading = await this.uiTranslator.translateUi("Your Language: " + this.targetLanguage?.name);
     }
   }
 
@@ -85,6 +102,7 @@ export class SettingsPage implements OnInit {
     if (this.userLanguage) {
       localStorage.setItem('userLanguageCode', this.userLanguage.code);
       localStorage.setItem('userLanguageName', this.userLanguage.name);
+      this.translateUi();
     }
   }
 }

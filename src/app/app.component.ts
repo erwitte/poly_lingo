@@ -8,6 +8,9 @@ import {Router} from "@angular/router";
   standalone: false,
 })
 export class AppComponent {
+  chatButton: string = "chat";
+  settingsButton = "settings";
+
   constructor(private router: Router) {}
 
 navigateTo(route: string) {
