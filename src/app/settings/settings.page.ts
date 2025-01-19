@@ -74,6 +74,7 @@ export class SettingsPage implements OnInit {
       localStorage.setItem('userLanguageCode', language.code);
       localStorage.setItem('userLanguageName', language.name);
       await this.translateUi();
+      this.uiTranslator.translateAppComponentButtons()
     }
   }
 
@@ -103,6 +104,7 @@ export class SettingsPage implements OnInit {
       localStorage.setItem('userLanguageCode', this.userLanguage.code);
       localStorage.setItem('userLanguageName', this.userLanguage.name);
       this.translateUi();
+      this.uiTranslator.translateAppComponentButtons()
     }
   }
 }

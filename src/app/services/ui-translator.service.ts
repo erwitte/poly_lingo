@@ -9,8 +9,19 @@ import {environment} from "../../environments/environment";
 export class UiTranslatorService {
   private deeplApiUrl = 'https://api-free.deepl.com/v2/translate';
   private authKey = environment.deeplApiKey;
+  private appComponentObject: any;
 
   constructor(private http: HttpClient) {
+  }
+
+  setAppComponentObject(obj: any) {
+    this.appComponentObject = obj;
+  }
+
+  async translateAppComponentButtons(){
+    const chat = await this.translateUi("chat");
+    const settings = await this.translateUi("settings");
+    this.appComponentObject.translateButtons(chat, settings);
   }
 
   async translateUi(text: string): Promise<string | null> {
@@ -22,7 +33,7 @@ export class UiTranslatorService {
       const body = new URLSearchParams();
       body.set('auth_key', this.authKey);
       body.set('text', text);
-      body.set('source_lang', "en".toUpperCase());
+      body.set('source_lang', "EN");
       // @ts-ignore
       body.set('target_lang', localStorage.getItem("userLanguageCode").toUpperCase());
 
@@ -30,7 +41,7 @@ export class UiTranslatorService {
         const response: any = await firstValueFrom(
           this.http.post(this.deeplApiUrl, body.toString(), {headers})
         );
-        return response.translations[0].text; // Return the translated text
+        return response.translations[0].text; // übersetzung
       } catch (error) {
         console.error('Error calling DeepL API:', error);
         return null;
@@ -38,5 +49,5 @@ export class UiTranslatorService {
     } else {
       return text;
   }
-}
+  }
 }

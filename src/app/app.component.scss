@@ -6,10 +6,6 @@
   z-index: 1000;
 }
 
-ion-router-outlet {
-  margin-bottom: 10px; //hebt die leiste an wenig an, sieht besser aus
-}
-
 @media (prefers-color-scheme: dark) {
   #button-container {
     background-color: #2b2b2b;

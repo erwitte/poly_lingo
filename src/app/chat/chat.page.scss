@@ -6,6 +6,11 @@ ion-list{
   padding: 0;
 }
 
+ion-input {
+  border: 1px solid #d3d3d3;
+  border-radius: 8px;
+}
+
 @media (prefers-color-scheme: light) {
   .light-grey {
     background-color: #f0f0f0;
