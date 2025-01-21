@@ -33,7 +33,7 @@ export class LinguaFrancaService {
       messages: [
         { role: 'system', content: 'You are a helpful assistant.' },
         { role: 'user', content: 'What is the lingua franca of ' + this.coordinatesString +
-        "reply only the language"}
+        "? reply only the language"}
       ],
       max_tokens: 50,
       temperature: 0.1

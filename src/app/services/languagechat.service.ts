@@ -35,7 +35,6 @@ export class LanguagechatService {
   }
 
   async getAiResponse(message: string) {
-    console.log("target: " + localStorage.getItem("targetLanguage") + " user: " + localStorage.getItem("userLanguage"));
     try {
       const response: any = await this.callOpenAI(message);
       return response.choices[0].message.content;

@@ -4,7 +4,7 @@
     <ion-button (click)="setOwnGps()">{{setByGpsButton}}</ion-button>
     <ion-item>
       <ion-label>{{chooseALanguageText}}</ion-label>
-      <ion-select placeholder="Select One" [(ngModel)]="userLanguage" (ionChange)="onUserLanguageChange()">
+      <ion-select placeholder={{selectOneText}} [(ngModel)]="userLanguage" (ionChange)="onUserLanguageChange()">
         <ion-select-option *ngFor="let language of languages" [value]="language">
           {{ language.name }}
         </ion-select-option>
@@ -16,7 +16,7 @@
     <ion-button (click)="setTargetGps()">{{setByGpsButton}}</ion-button>
     <ion-item>
       <ion-label>{{chooseALanguageText}}</ion-label>
-      <ion-select placeholder="Select One" [(ngModel)]="targetLanguage" (ionChange)="onTargetLanguageChange()">
+      <ion-select placeholder={{selectOneText}} [(ngModel)]="targetLanguage" (ionChange)="onTargetLanguageChange()">
         <ion-select-option *ngFor="let language of languages" [value]="language">
           {{language.name}}
         </ion-select-option>

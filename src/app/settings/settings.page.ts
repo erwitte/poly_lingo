@@ -13,30 +13,40 @@ export class SettingsPage implements OnInit {
   targetLanguageHeading: string | null = "Target language: -";
   setByGpsButton: string | null = "set by gps";
   chooseALanguageText: string | null = "choose a language";
+  selectOneText: string | null = "select one";
 
   userLanguage: { name: string; code: string } | null = null; // Object for user language
   targetLanguage: { name: string; code: string } | null = null;
   languages = [
-    { name: 'English', code: 'en' },
-    { name: 'Mandarin Chinese', code: 'zh' },
-    { name: 'Spanish', code: 'es' },
-    { name: 'Hindi', code: 'hi' },
     { name: 'Arabic', code: 'ar' },
-    { name: 'Bengali', code: 'bn' },
-    { name: 'Portuguese', code: 'pt' },
-    { name: 'Russian', code: 'ru' },
-    { name: 'Japanese', code: 'ja' },
-    { name: 'Punjabi', code: 'pa' },
+    { name: 'Bulgarian', code: 'bg' },
+    { name: 'Czech', code: 'cs' },
+    { name: 'Danish', code: 'da' },
     { name: 'German', code: 'de' },
-    { name: 'Javanese', code: 'jv' },
-    { name: 'Wu Chinese (Shanghainese)', code: 'wuu' },
-    { name: 'Malay/Indonesian', code: 'ms' },
-    { name: 'Telugu', code: 'te' },
-    { name: 'Vietnamese', code: 'vi' },
-    { name: 'Korean', code: 'ko' },
+    { name: 'Greek', code: 'el' },
+    { name: 'English', code: 'en' },
+    { name: 'Spanish', code: 'es' },
+    { name: 'Estonian', code: 'et' },
+    { name: 'Finnish', code: 'fi' },
     { name: 'French', code: 'fr' },
+    { name: 'Hungarian', code: 'hu' },
+    { name: 'Indonesian', code: 'id' },
+    { name: 'Italian', code: 'it' },
+    { name: 'Japanese', code: 'ja' },
+    { name: 'Korean', code: 'ko' },
+    { name: 'Lithuanian', code: 'lt' },
+    { name: 'Latvian', code: 'lv' },
+    { name: 'Norwegian Bokmål', code: 'nb' },
+    { name: 'Dutch', code: 'nl' },
+    { name: 'Polish', code: 'pl' },
+    { name: 'Portuguese', code: 'pt' },
+    { name: 'Romanian', code: 'ro' },
+    { name: 'Russian', code: 'ru' },
+    { name: 'Slovak', code: 'sk' },
+    { name: 'Slovenian', code: 'sl' },
+    { name: 'Swedish', code: 'sv' },
     { name: 'Turkish', code: 'tr' },
-    { name: 'Tamil', code: 'ta' }
+    { name: 'Ukrainian', code: 'uk' },
   ];
 
   constructor(private linguaFrancaService: LinguaFrancaService,
@@ -62,6 +72,7 @@ export class SettingsPage implements OnInit {
     this.targetLanguageHeading = await this.uiTranslator.translateUi("Your Language: " + this.targetLanguage?.name);
     this.setByGpsButton = await this.uiTranslator.translateUi("set by gps");
     this.chooseALanguageText = await this.uiTranslator.translateUi("choose a language");
+    this.selectOneText = await this.uiTranslator.translateUi("select one");
   }
 
   async setOwnGps() {
