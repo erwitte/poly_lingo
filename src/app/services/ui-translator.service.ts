@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {firstValueFrom} from "rxjs";
 import {environment} from "../../environments/environment";
 
@@ -24,7 +24,8 @@ export class UiTranslatorService {
     this.appComponentObject.translateButtons(chat, settings);
   }
 
-  async translateUi(text: string): Promise<string | null> {
+  // @ts-ignore
+  async translateUi(text: string): Promise<string> {
     if (localStorage.getItem("userLanguageCode") !== null) {
       const headers = new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -44,10 +45,14 @@ export class UiTranslatorService {
         return response.translations[0].text; // übersetzung
       } catch (error) {
         console.error('Error calling DeepL API:', error);
-        return null;
+        // in case of high api usage fault tolerance is used by deepL
+        if (error instanceof HttpErrorResponse && error.status === 0){
+          console.log("recalling api");
+          return this.translateUi(text);
+        }
       }
     } else {
       return text;
-  }
+    }
   }
 }
